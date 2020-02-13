@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 10:43:07 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/04 18:42:47 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/11 20:22:24 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		ft_printf(const char *format, ...)
 {
-	va_list	arguments;
-	t_buf	buffer;
-	int		ret;
-	int		i;
+	va_list		arguments;
+	t_buf		buffer;
+	int			ret;
+	int			i;
 
 	buffer.pos = 0;
 	buffer.str = NULL;
@@ -29,9 +29,8 @@ int		ft_printf(const char *format, ...)
 			return (-1);
 		if (*format == '%')
 		{
-			if ((i = ft_fillarg(&buffer, format, arguments)) < 0)
+			if ((ft_fillarg(&buffer, &format, arguments)) < 0)
 				return (-1);
-			format += i;
 		}
 		*buffer.str = *format;
 		buffer.pos++;
@@ -46,12 +45,17 @@ int		ft_printf(const char *format, ...)
 	return (ret);
 }
 
-int		main()
+int		ft_fillarg(t_buf *buffer, const char **format, va_list arguments)
 {
-	int i = 2345;
-	ft_printf("123   %d   456789   %s   123456789\n", i, "abcdefg");
-//	printf("123   %d   456789   %s   123456789\n", i, "abcdefg");
-	//system("leaks a.out");
-	//printf("123456789\n");
+	t_flags	flags;
+
+	flags.minus = 0;
+	flags.zero = 0;
+	flags.width = 0;
+	flags.precision = 0;
+	*format += 1;
+	ft_checkflags(format, &flags, arguments);
+	if (**format == 'd' || **format == 'i')
+		ft_fillint(buffer, format, arguments, &flags);
 	return (0);
 }
