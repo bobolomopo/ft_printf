@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_allocate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 12:58:07 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 19:35:09 by jandre           ###   ########.fr       */
+/*   Created: 2020/02/18 18:29:49 by jandre            #+#    #+#             */
+/*   Updated: 2020/02/18 19:04:53 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_printf.h"
 
-int	main()
+char	*ft_allocate(int len, t_flags *flags)
 {
-	int d = 42128;
-	printf("%*d\n", 15, d);
-	printf("%0*d\n", 15, d);
-	ft_printf("%0*d\n", 15, d);
-	return (0);
+	char *result;
+
+	if (flags->width > flags->precision)
+	{
+		if (!(result = ft_strnew(flags->width + 1)))
+			return (NULL);
+	}
+	else
+	{
+		if (!(result = ft_strnew(flags->precision + 1)))
+			return (NULL);
+	}
+	return (result);
 }

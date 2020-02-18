@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:41:42 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/11 18:36:46 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/18 19:02:57 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,50 +36,4 @@ int			ft_check(t_buf *buffer)
 		free(temp);
 	}
 	return (1);
-}
-
-int		ft_checkflags(const char **format, t_flags *flags, va_list arguments)
-{
-	while (**format == '-')
-	{
-		flags->minus = 1;
-		*format += 1;
-	}
-	while (**format == '0')
-	{
-		flags->zero = 1;
-		*format += 1;
-	}
-	if (((**format >= '0' && **format <= '9') || **format == '*'))
-		ft_width(format, flags, arguments);
-	if ((**format == '.'))
-		ft_precision(format, flags, arguments);
-	return (0);
-}
-
-int		ft_width(const char **format, t_flags *flags, va_list arguments)
-{
-	if (**format == '*')
-	{
-		flags->width = va_arg(arguments, int);
-		*format += 1;
-		return (0);
-	}
-	flags->width = ft_atoi(*format);
-	*format += ft_nbrlen(flags->width);
-	return (0);
-}
-
-int		ft_precision(const char **format, t_flags *flags, va_list arguments)
-{
-	*format += 1;
-	if (**format == '*')
-	{
-		flags->precision = va_arg(arguments, int);
-		*format += 1;
-		return (0);
-	}
-	flags->precision = ft_atoi(*format);
-	*format += ft_nbrlen(flags->precision);
-	return (0);
 }
