@@ -6,11 +6,11 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 17:15:29 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 20:03:33 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/18 21:24:17 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 static char	*ft_flagsint(char *arg, t_flags *flags)
 {

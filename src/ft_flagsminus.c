@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_flagselse.c                                     :+:      :+:    :+:   */
+/*   ft_flagsminus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/18 18:45:19 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 20:11:55 by jandre           ###   ########.fr       */
+/*   Created: 2020/02/18 18:20:47 by jandre            #+#    #+#             */
+/*   Updated: 2020/02/18 21:24:35 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
-static void		ft_fillelse(char *arg, char *result, t_flags *flags, int len)
+static void	ft_fillminus(char *arg, char *result, t_flags *flags, int len)
 {
-	int		i;
 	int		j;
-	int		k;
 
-	i = 0;
-	k = ft_strlen(arg);
-	while (flags->width && i < flags->width - flags->precision)
-		result[i++] = ' ';
+	j = 0;
 	if (*arg == '-')
 	{
-		result[i++] = '-';
-		arg++;
+		result[j] = *arg++;
+		j++;
+		flags->precision += 2;
 	}
-	j = i;
-	while (i - j < flags->precision - k)
-		result[i++] = '0';
+	while (j < flags->precision - len)
+		result[j++] = '0';
 	while (*arg)
-		result[i++] = *arg++;
+		result[j++] = *arg++;
+	while (j < flags->width)
+		result[j++] = ' ';
 }
 
-char			*ft_flagselse(char *arg, t_flags *flags)
+char		*ft_flagsminus(char *arg, t_flags *flags)
 {
 	char	*temp;
 	int		len;
@@ -49,11 +46,7 @@ char			*ft_flagselse(char *arg, t_flags *flags)
 	}
 	else
 		return (arg);
-	if (*arg == '-' && flags->precision)
-		flags->precision++;
-	if (flags->precision == 0 || flags->precision < len)
-		flags->precision = len;
-	ft_fillelse(arg, result, flags, len);
+	ft_fillminus(arg, result, flags, len);
 	free(temp);
 	return (result);
 }

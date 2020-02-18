@@ -6,11 +6,11 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:41:42 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 19:02:57 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/18 21:23:57 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int			ft_check(t_buf *buffer)
 {

@@ -6,11 +6,11 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:15:14 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 20:01:46 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/18 21:24:10 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 static int	ft_width(const char **format, t_flags *flags, va_list arguments)
 {
