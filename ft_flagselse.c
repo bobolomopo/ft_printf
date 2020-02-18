@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:45:19 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 19:34:22 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/18 20:11:55 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@ static void		ft_fillelse(char *arg, char *result, t_flags *flags, int len)
 {
 	int		i;
 	int		j;
+	int		k;
 
 	i = 0;
-	j = 0;
+	k = ft_strlen(arg);
 	while (flags->width && i < flags->width - flags->precision)
 		result[i++] = ' ';
 	if (*arg == '-')
 	{
 		result[i++] = '-';
 		arg++;
-		j = i;
 	}
-	while (i - j < flags->precision - i)
+	j = i;
+	while (i - j < flags->precision - k)
 		result[i++] = '0';
 	while (*arg)
 		result[i++] = *arg++;
@@ -41,7 +42,7 @@ char			*ft_flagselse(char *arg, t_flags *flags)
 
 	temp = arg;
 	len = ft_strlen(arg);
-	if (len < flags->width && flags->width > flags->precision)
+	if (len < flags->width || len < flags->precision)
 	{
 		if (!(result = ft_allocate(len, flags)))
 			return (NULL);
