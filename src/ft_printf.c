@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 10:43:07 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 21:49:23 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 16:11:20 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		ft_printf(const char *format, ...)
 	va_list		arguments;
 	t_buf		buffer;
 	int			ret;
-	int			i;
 
 	buffer.pos = 0;
 	buffer.str = NULL;
@@ -32,10 +31,13 @@ int		ft_printf(const char *format, ...)
 			if ((ft_fillarg(&buffer, &format, arguments)) < 0)
 				return (-1);
 		}
-		*buffer.str = *format;
-		buffer.pos++;
-		format++;
-		buffer.str++;
+		else
+		{
+			*buffer.str = *format;
+			buffer.pos++;
+			format++;
+			buffer.str++;
+		}
 	}
 	buffer.str = buffer.str - buffer.pos;
 	write(1, buffer.str, buffer.pos);
@@ -53,6 +55,7 @@ int		ft_fillarg(t_buf *buffer, const char **format, va_list arguments)
 	flags.zero = 0;
 	flags.width = 0;
 	flags.precision = 0;
+	flags.checkprecision = 0;
 	*format += 1;
 	ft_checkflags(format, &flags, arguments);
 	if (**format == 'd' || **format == 'i')

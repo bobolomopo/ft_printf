@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:15:14 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 21:24:10 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 16:26:27 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	ft_width(const char **format, t_flags *flags, va_list arguments)
 
 static int	ft_precision(const char **format, t_flags *flags, va_list arguments)
 {
+	flags->checkprecision = 1;
 	*format += 1;
 	if (**format == '*')
 	{
@@ -48,6 +49,11 @@ static int	ft_precision(const char **format, t_flags *flags, va_list arguments)
 int			ft_checkflags(const char **format, t_flags *flags,
 		va_list arguments)
 {
+	while (**format == '0')
+	{
+		flags->zero = 1;
+		*format += 1;
+	}
 	while (**format == '-')
 	{
 		flags->minus = 1;
@@ -58,6 +64,8 @@ int			ft_checkflags(const char **format, t_flags *flags,
 		flags->zero = 1;
 		*format += 1;
 	}
+	if (flags->minus || flags->checkprecision)
+		flags->zero = 0;
 	if (((**format >= '0' && **format <= '9') || **format == '*'))
 		ft_width(format, flags, arguments);
 	if ((**format == '.'))

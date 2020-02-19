@@ -6,13 +6,13 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:29:49 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 21:23:43 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 14:01:16 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*ft_allocate(int len, t_flags *flags)
+char	*ft_allocate(t_flags *flags)
 {
 	char *result;
 

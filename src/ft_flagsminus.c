@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:47 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 21:24:35 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 14:02:38 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char		*ft_flagsminus(char *arg, t_flags *flags)
 	len = ft_strlen(arg);
 	if (len < flags->width || len < flags->precision)
 	{
-		if (!(result = ft_allocate(len, flags)))
+		if (!(result = ft_allocate(flags)))
 			return (NULL);
 	}
 	else

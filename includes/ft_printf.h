@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 10:46:41 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 21:25:08 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 16:11:56 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ typedef struct	s_flags
 	int		zero;
 	int		width;
 	int		precision;
+	int		checkprecision;
 }				t_flags;
 int				ft_printf(const char *format, ...);
-char			*ft_allocate(int len, t_flags *flags);
+char			*ft_allocate(t_flags *flags);
 int				ft_nbrlen_un(unsigned int n);
 char			*ft_itoa_un(unsigned int n);
 int				ft_check(t_buf *buffer);
+char			*ft_flagsempty(t_flags *flags);
 int				ft_checkflags(const char **format, t_flags *flags,
 		va_list arguments);
 int				ft_fillarg(t_buf *buffer, const char **format,

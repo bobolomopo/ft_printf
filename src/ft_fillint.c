@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 17:15:29 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/18 21:24:17 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 16:10:59 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 static char	*ft_flagsint(char *arg, t_flags *flags)
 {
-	char	*result;
-
+	if (*arg == '0' && flags->precision == 0 && flags->checkprecision)
+	{
+		free(arg);
+		return (ft_flagsempty(flags));
+	}
 	if (flags->minus)
 		return (ft_flagsminus(arg, flags));
 	else if (flags->zero)
