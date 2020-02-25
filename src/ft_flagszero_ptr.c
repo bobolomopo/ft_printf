@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_flagszero.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 12:58:07 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/19 19:02:50 by jandre           ###   ########.fr       */
+/*   Created: 2020/02/18 18:57:19 by jandre            #+#    #+#             */
+/*   Updated: 2020/02/19 17:54:14 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
-int	main()
+char	*ft_flagszero_ptr(char *arg, t_flags *flags)
 {
-	printf("|%s|\n", "abcde");
-	ft_printf("|%s|\n", "abcde");
-	printf("|%32s|\n", "abcde");
-	ft_printf("|%32s|\n", "abcde");
-	return (0);
+	if (flags->precision == 0)
+	{
+		if (*arg == '-')
+		{
+			flags->precision = flags->width - 1;
+			flags->width = 0;
+		}
+		else
+		{
+			flags->precision = flags->width;
+			flags->width = 0;
+		}
+	}
+	return (ft_flagselse_ptr(arg, flags));
 }

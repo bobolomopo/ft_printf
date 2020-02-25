@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:47 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/19 18:37:24 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 17:54:40 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ static void	ft_fillminus(char *arg, char *result, t_flags *flags, int len)
 	}
 	while (j < flags->precision - len)
 		result[j++] = '0';
+	result[j++] = '0';
+	result[j++] = 'x';
 	while (*arg)
 		result[j++] = *arg++;
 	while (j < flags->width)
 		result[j++] = ' ';
 }
 
-char		*ft_flagsminus(char *arg, t_flags *flags)
+char		*ft_flagsminus_ptr(char *arg, t_flags *flags)
 {
 	char	*temp;
 	int		len;
@@ -45,7 +47,7 @@ char		*ft_flagsminus(char *arg, t_flags *flags)
 			return (NULL);
 	}
 	else
-		return (arg);
+		return (ft_strjoin("0x", arg));
 	ft_fillminus(arg, result, flags, len);
 	free(temp);
 	return (result);

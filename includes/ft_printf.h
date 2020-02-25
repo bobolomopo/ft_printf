@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 10:46:41 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/19 16:11:56 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 18:50:26 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,20 @@ int				ft_nbrlen_un(unsigned int n);
 char			*ft_itoa_un(unsigned int n);
 int				ft_check(t_buf *buffer);
 char			*ft_flagsempty(t_flags *flags);
+char			*ft_flagsempty_ptr(t_flags *flags);
+char			*ft_flagsempty_char(t_flags *flags);
 int				ft_checkflags(const char **format, t_flags *flags,
 		va_list arguments);
 int				ft_fillarg(t_buf *buffer, const char **format,
 		va_list arguments);
 int				ft_fillchar(t_buf *buffer, const char **format,
-		va_list arguments);
+		va_list arguments, t_flags *flags);
 int				ft_fillint(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags);
 int				ft_fillptr(t_buf *buffer, const char **format,
-		va_list arguments);
+		va_list arguments, t_flags *flags);
+int				ft_fillpct(t_buf *buffer, const char **format,
+		t_flags *flags);
 int				ft_filloctal(t_buf *buffer, const char **format,
 		va_list arguments);
 int				ft_fillhexa(t_buf *buffer, const char **format,
@@ -66,5 +70,11 @@ char			*ft_itoa_base(long long nbr, char *base);
 char			*ft_flagsminus(char *arg, t_flags *flags);
 char			*ft_flagszero(char *arg, t_flags *flags);
 char			*ft_flagselse(char *arg, t_flags *flags);
+char			*ft_flagselse_ptr(char *arg, t_flags *flags);
+char			*ft_flagszero_ptr(char *arg, t_flags *flags);
+char			*ft_flagsminus_ptr(char *arg, t_flags *flags);
+char			*ft_flagselse_char(char *arg, t_flags *flags);
+char			*ft_flagszero_char(char *arg, t_flags *flags);
+char			*ft_flagsminus_char(char *arg, t_flags *flags);
 
 #endif

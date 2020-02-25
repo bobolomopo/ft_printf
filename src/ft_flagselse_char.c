@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:45:19 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/19 18:27:03 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 19:13:48 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,23 @@ static void		ft_fillelse(char *arg, char *result, t_flags *flags, int len)
 	int		j;
 
 	i = 0;
-	while (flags->width && i < flags->width - flags->precision)
+	while (flags->width && i < flags->width - len)
 		result[i++] = ' ';
-	if (*arg == '-')
-	{
-		result[i++] = '-';
-		arg++;
-	}
 	j = i;
-	while (i - j < flags->precision - len)
-		result[i++] = '0';
-	while (*arg)
+	while (i - j < len)
 		result[i++] = *arg++;
 }
 
-char			*ft_flagselse(char *arg, t_flags *flags)
+char			*ft_flagselse_char(char *arg, t_flags *flags)
 {
-	char	*temp;
 	int		len;
 	char	*result;
 
-	temp = arg;
 	len = ft_strlen(arg);
-	if (len < flags->width || len < flags->precision)
-	{
-		if (!(result = ft_allocate(flags)))
-			return (NULL);
-	}
-	else
-		return (arg);
-	if (*arg == '-' && flags->precision)
-		flags->precision++;
-	if (flags->precision == 0 || flags->precision < len)
-		flags->precision = len;
+	if (len > flags->precision && flags->checkprecision)
+		len = flags->precision;
+	if (!(result = ft_strnew(flags->width + len)))
+		return (NULL);
 	ft_fillelse(arg, result, flags, len);
-	free(temp);
 	return (result);
 }

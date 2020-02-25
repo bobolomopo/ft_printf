@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 10:43:07 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/19 16:11:20 by jandre           ###   ########.fr       */
+/*   Updated: 2020/02/19 18:33:11 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,13 @@ int		ft_fillarg(t_buf *buffer, const char **format, va_list arguments)
 	flags.checkprecision = 0;
 	*format += 1;
 	ft_checkflags(format, &flags, arguments);
+	if (**format == '%')
+		ft_fillpct(buffer, format, &flags);
 	if (**format == 'd' || **format == 'i')
 		ft_fillint(buffer, format, arguments, &flags);
+	if (**format == 'p')
+		ft_fillptr(buffer, format, arguments, &flags);
+	if (**format == 's' || **format == 'c')
+		ft_fillchar(buffer, format, arguments, &flags);
 	return (0);
 }
