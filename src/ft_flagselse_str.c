@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_flagsempty.c                                    :+:      :+:    :+:   */
+/*   ft_flagselse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 15:57:08 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/19 18:43:01 by jandre           ###   ########.fr       */
+/*   Created: 2020/02/18 18:45:19 by jandre            #+#    #+#             */
+/*   Updated: 2020/02/19 19:13:48 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*ft_flagsempty_char(t_flags *flags)
+static void		ft_fillelse(char *arg, char *result, t_flags *flags, int len)
 {
 	int		i;
-	char	*result;
+	int		j;
 
 	i = 0;
-	if (!(result = ft_allocate(flags)))
-		return (NULL);
-	while (i < flags->width)
+	while (flags->width && i < flags->width - len)
 		result[i++] = ' ';
+	j = i;
+	while (i - j < len)
+		result[i++] = *arg++;
+}
+
+char			*ft_flagselse_str(char *arg, t_flags *flags)
+{
+	int		len;
+	char	*result;
+
+	len = ft_strlen(arg);
+	if (len > flags->precision && flags->checkprecision)
+		len = flags->precision;
+	if (!(result = ft_strnew(flags->width + len)))
+		return (NULL);
+	ft_fillelse(arg, result, flags, len);
 	return (result);
 }

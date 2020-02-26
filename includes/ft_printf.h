@@ -44,12 +44,12 @@ char			*ft_itoa_un(unsigned int n);
 int				ft_check(t_buf *buffer);
 char			*ft_flagsempty(t_flags *flags);
 char			*ft_flagsempty_ptr(t_flags *flags);
-char			*ft_flagsempty_char(t_flags *flags);
+char			*ft_flagsempty_str(t_flags *flags);
 int				ft_checkflags(const char **format, t_flags *flags,
 		va_list arguments);
 int				ft_fillarg(t_buf *buffer, const char **format,
 		va_list arguments);
-int				ft_fillchar(t_buf *buffer, const char **format,
+int				ft_fillstr(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags);
 int				ft_fillint(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags);
@@ -73,8 +73,8 @@ char			*ft_flagselse(char *arg, t_flags *flags);
 char			*ft_flagselse_ptr(char *arg, t_flags *flags);
 char			*ft_flagszero_ptr(char *arg, t_flags *flags);
 char			*ft_flagsminus_ptr(char *arg, t_flags *flags);
-char			*ft_flagselse_char(char *arg, t_flags *flags);
-char			*ft_flagszero_char(char *arg, t_flags *flags);
-char			*ft_flagsminus_char(char *arg, t_flags *flags);
+char			*ft_flagselse_str(char *arg, t_flags *flags);
+char			*ft_flagszero_str(char *arg, t_flags *flags);
+char			*ft_flagsminus_str(char *arg, t_flags *flags);
 
 #endif

@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_flagsminus.c                                    :+:      :+:    :+:   */
+/*   ft_flagsempty.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/18 18:20:47 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/19 19:12:55 by jandre           ###   ########.fr       */
+/*   Created: 2020/02/19 15:57:08 by jandre            #+#    #+#             */
+/*   Updated: 2020/02/26 15:50:39 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void	ft_fillminus(char *arg, char *result, t_flags *flags, int len)
+char	*ft_flagsempty_str(t_flags *flags)
 {
-	int		j;
-
-	j = 0;
-	while (j < len)
-		result[j++] = *arg++;
-	while (j < flags->width)
-		result[j++] = ' ';
-}
-
-char		*ft_flagsminus_char(char *arg, t_flags *flags)
-{
-	int		len;
+	int		i;
 	char	*result;
 
-	len = ft_strlen(arg);
-	if (len > flags->precision && flags->checkprecision)
-		len = flags->precision;
-	if (!(result = ft_strnew(flags->width + len)))
+	i = 0;
+	if (!(result = ft_allocate(flags)))
 		return (NULL);
-	ft_fillminus(arg, result, flags, len);
+	while (i < flags->width)
+		result[i++] = ' ';
 	return (result);
 }

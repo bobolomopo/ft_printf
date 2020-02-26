@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-char	*ft_flagszero_char(char *arg, t_flags *flags)
+char	*ft_flagszero_str(char *arg, t_flags *flags)
 {
 	if (flags->precision == 0)
 	{
@@ -27,5 +27,5 @@ char	*ft_flagszero_char(char *arg, t_flags *flags)
 			flags->width = 0;
 		}
 	}
-	return (ft_flagselse_char(arg, flags));
+	return (ft_flagselse_str(arg, flags));
 }
