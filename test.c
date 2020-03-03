@@ -15,14 +15,7 @@
 
 int	main()
 {
-	char *str = "abc";
-	printf("|%-*.*s|\n", 7, 3, "yolo");
-	ft_printf("|%-*.*s|\n", 7, 3, "yolo");
-	printf("|%*i && %p && %p|\n", -32, 100, str, str);
-	printf("|%p && %2p && %2p && %-42p|\n", str, str, str, str);
-	printf("|%23p && %23p|\n", str, str);
-	ft_printf("|%*i && %p && %p|\n", -32, 100, str, str);
-	ft_printf("|%p && %2p && %2p && %-42p|\n", str, str, str, str);
-	ft_printf("|%23p && %23p|\n", str, str);
+	printf("%37p%-156p%-52.134s%-*c%--10c\n" ,(void*)7158009393390959295lu,(void*)17392018986470122959lu,":S>{zPslY6#o",97,54,-52);
+	ft_printf("%37p%-156p%-52.134s%-*c%--10c\n" ,(void*)7158009393390959295lu,(void*)17392018986470122959lu,":S>{zPslY6#o",97,54,-52);
 	return (0);
 }

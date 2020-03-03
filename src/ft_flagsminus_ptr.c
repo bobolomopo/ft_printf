@@ -39,7 +39,7 @@ char		*ft_flagsminus_ptr(char *arg, t_flags *flags)
 	char	*result;
 
 	len = ft_strlen(arg);
-	if (len < flags->width || len < flags->precision)
+	if (len <= flags->width || len <= flags->precision)
 	{
 		if (!(result = ft_allocate(flags)))
 			return (NULL);

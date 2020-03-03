@@ -14,7 +14,7 @@
 
 char	*ft_flagszero(char *arg, t_flags *flags)
 {
-	if (flags->precision == 0)
+	if (flags->checkprecision == 0)
 	{
 		if (*arg == '-')
 		{

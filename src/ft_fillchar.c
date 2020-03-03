@@ -30,14 +30,14 @@ int			ft_fillchar(t_buf *buffer, const char **format, va_list arguments,
 	int		i;
 
 	c = va_arg(arguments, int);
-	if (c == 0 || c == -0)
+	if (c < 32 || c > 127)
 	{
 		i = -1;
 		if (flags->minus == 1)
 		{
 			if (ft_check(buffer) < 0)
 				return (-1);
-			*buffer->str = '\0';
+			*buffer->str = (char)c;
 			buffer->pos++;
 			buffer->str++;
 			while (++i < flags->width - 1)
@@ -61,7 +61,7 @@ int			ft_fillchar(t_buf *buffer, const char **format, va_list arguments,
 			}
 			if (ft_check(buffer) < 0)
 				return (-1);
-			*buffer->str = '\0';
+			*buffer->str = (char)c;
 			buffer->pos++;
 			buffer->str++;
 		}

@@ -14,6 +14,8 @@
 
 static char	*ft_flagspct(char *arg, t_flags *flags)
 {
+	flags->precision = 0;
+	flags->checkprecision = 0;
 	if (flags->minus)
 		return (ft_flagsminus(arg, flags));
 	else if (flags->zero)
@@ -30,7 +32,6 @@ int			ft_fillpct(t_buf *buffer, const char **format, t_flags *flags)
 	if (!(pct = ft_strnew(1)))
 		return (-1);
 	pct[0] = '%';
-	pct[1] = '\0';
 	if (!(arg = (ft_flagspct(pct, flags))))
 		return (-1);
 	temp = arg;

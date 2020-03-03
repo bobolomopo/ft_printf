@@ -65,8 +65,7 @@ int				ft_fillhexamin(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags);
 int				ft_fillhexamaj(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags);
-int				digit_count(unsigned long long ptr, int size);
-char			*ft_itoa_base(long long nbr, char *base);
+int				digit_count(long long ptr, int size);
 char			*ft_flagsminus(char *arg, t_flags *flags);
 char			*ft_flagszero(char *arg, t_flags *flags);
 char			*ft_flagselse(char *arg, t_flags *flags);

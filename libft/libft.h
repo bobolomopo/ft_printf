@@ -54,7 +54,7 @@ int				ft_isprint(int c);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);
-char			*ft_itoa_base(long long nbr, char *base);
+char			*ft_itoa_base(unsigned long nbr, char *base);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putstr_fd(char *s, int fd);

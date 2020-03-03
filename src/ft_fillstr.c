@@ -28,7 +28,7 @@ int			ft_fillstr(t_buf *buffer, const char **format, va_list arguments,
 	char	*str;
 	char	*temp;
 
-	str = (char *)va_arg(arguments, char *);
+	str = va_arg(arguments, char *);
 	if (str == NULL)
 	{
 		if (!(arg = (ft_flagsstr("(null)", flags))))
@@ -49,9 +49,9 @@ int			ft_fillstr(t_buf *buffer, const char **format, va_list arguments,
 		buffer->str++;
 		arg++;
 	}
+	free(temp);
 	while (**format != 's' && **format != 'c')
 		*format += 1;
 	*format += 1;
-	free(temp);
 	return (1);
 }
