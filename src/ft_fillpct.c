@@ -34,6 +34,7 @@ int			ft_fillpct(t_buf *buffer, const char **format, t_flags *flags)
 	pct[0] = '%';
 	if (!(arg = (ft_flagspct(pct, flags))))
 		return (-1);
+	free(pct);
 	temp = arg;
 	while (*arg)
 	{

@@ -55,7 +55,7 @@ int				ft_fillptr(t_buf *buffer, const char **format,
 	}
 	else 
 	{
-		if ((!(temp = ft_itoa_base((unsigned long)ptr, "0123456789abcdef")))
+		if ((!(temp = ft_itoa_base((unsigned long long)ptr, "0123456789abcdef")))
 			|| (!(arg = ft_flagsptr(temp, flags))))
 			return (-1);
 		free(temp);

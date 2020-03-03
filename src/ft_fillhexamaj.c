@@ -51,6 +51,7 @@ int				ft_fillhexamaj(t_buf *buffer, const char **format,
 	if ((!(temp = ft_itoa_base((long long)nbr, "0123456789ABCDEF")))
 		|| (!(arg = ft_flagshexa(temp, flags))))
 		return (-1);
+	free(temp);
 	temp = arg;
 	if (ft_fill(buffer, arg, format) < 0)
 		return (-1);

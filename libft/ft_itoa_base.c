@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stdio.h>
 
-char	*ft_itoa_base(unsigned long nbr, char *base)
+char	*ft_itoa_base(unsigned long long nbr, char *base)
 {
 	char	*result;
 	int		baselen;
@@ -32,8 +32,9 @@ char	*ft_itoa_base(unsigned long nbr, char *base)
 		return (NULL);
 	while (nbr != 0)
 	{
-		result[--nbrlen] = base[nbr % baselen];
-		nbr /= baselen;
+		result[nbrlen - 1] = base[nbr % (unsigned long long)baselen];
+		nbr /= (unsigned long long)baselen;
+		nbrlen--;
 	}
 	return (result);
 }
