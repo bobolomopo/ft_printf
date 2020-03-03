@@ -6,7 +6,7 @@
 #    By: jandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/19 13:41:52 by jandre            #+#    #+#              #
-#    Updated: 2020/02/19 18:41:34 by jandre           ###   ########.fr        #
+#    Updated: 2020/03/02 11:29:48 by jandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ FLAGS = -Wall -Werror -Wextra
 SRC := ft_allocate.c ft_check.c ft_checkflags.c ft_fillint.c ft_flagselse.c \
 	ft_flagsminus.c ft_flagszero.c ft_printf.c ft_flagsempty.c ft_fillptr.c \
 	ft_flagsempty_ptr.c ft_flagszero_ptr.c ft_flagsminus_ptr.c \
-	ft_flagselse_ptr.c ft_fillpct.c ft_fillchar.c ft_flagsempty_char.c \
-	ft_flagselse_char.c ft_flagszero_char.c ft_flagsminus_char.c
+	ft_flagselse_ptr.c ft_fillpct.c ft_fillstr.c ft_flagsempty_str.c \
+	ft_flagselse_str.c ft_flagsminus_str.c ft_flagsprecision_str.c \
+	ft_fillhexamin.c ft_fillhexamaj.c ft_fillunsigned.c ft_fillchar.c
 SRC_DIR = ./src
 OBJECTS := $(SRC:.c=.o)
 LIBRARIES = libftprintf.a ./libft/libft.a

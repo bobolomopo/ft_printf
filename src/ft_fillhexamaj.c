@@ -12,15 +12,15 @@
 
 #include "../includes/ft_printf.h"
 
-static char		*ft_flagsptr(char *arg, t_flags *flags)
+static char		*ft_flagshexa(char *arg, t_flags *flags)
 {
 	if (*arg == '0' && flags->precision == 0 && flags->checkprecision)
-		return (ft_flagsempty_ptr(flags));
+		return (ft_flagsempty(flags));
 	if (flags->minus)
-		return (ft_flagsminus_ptr(arg, flags));
+		return (ft_flagsminus(arg, flags));
 	else if (flags->zero)
-		return (ft_flagszero_ptr(arg, flags));
-	return (ft_flagselse_ptr(arg, flags));
+		return (ft_flagszero(arg, flags));
+	return (ft_flagselse(arg, flags));
 }
 
 static int		ft_fill(t_buf *buffer, char *arg, const char **format)
@@ -34,32 +34,23 @@ static int		ft_fill(t_buf *buffer, char *arg, const char **format)
 		buffer->str++;
 		arg++;
 	}
-	while (**format != 'p')
+	while (**format != 'X')
 		*format += 1;
 	*format += 1;
 	return (1);
 }
 
-int				ft_fillptr(t_buf *buffer, const char **format,
+int				ft_fillhexamaj(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags)
 {
 	char					*arg;
-	void					*ptr;
+	unsigned int			nbr;
 	char					*temp;
 
-	ptr = va_arg(arguments, void *);
-	if (ptr == NULL)
-	{
-		if (!(arg = ft_flagsptr("0", flags)))
-			return (-1);
-	}
-	else 
-	{
-		if ((!(temp = ft_itoa_base((long long)ptr, "0123456789abcdef")))
-			|| (!(arg = ft_flagsptr(temp, flags))))
-			return (-1);
-		free(temp);
-	}
+	nbr = va_arg(arguments, unsigned int);
+	if ((!(temp = ft_itoa_base((long long)nbr, "0123456789ABCDEF")))
+		|| (!(arg = ft_flagshexa(temp, flags))))
+		return (-1);
 	temp = arg;
 	if (ft_fill(buffer, arg, format) < 0)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 10:43:07 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/26 16:06:51 by jandre           ###   ########.fr       */
+/*   Updated: 2020/03/02 13:54:20 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,19 @@ int		ft_fillarg(t_buf *buffer, const char **format, va_list arguments)
 	ft_checkflags(format, &flags, arguments);
 	if (**format == '%')
 		ft_fillpct(buffer, format, &flags);
-	if (**format == 'd' || **format == 'i')
+	else if (**format == 'd' || **format == 'i')
 		ft_fillint(buffer, format, arguments, &flags);
-	if (**format == 'p')
+	else if (**format == 'p')
 		ft_fillptr(buffer, format, arguments, &flags);
-	if (**format == 's')
+	else if (**format == 's')
 		ft_fillstr(buffer, format, arguments, &flags);
+	else if (**format == 'c')
+		ft_fillchar(buffer, format, arguments, &flags);
+	else if (**format == 'u')
+		ft_fillunsigned(buffer, format, arguments, &flags);
+	else if (**format == 'x')
+		ft_fillhexamin(buffer, format, arguments, &flags);
+	else if (**format == 'X')
+		ft_fillhexamaj(buffer, format, arguments, &flags);
 	return (0);
 }

@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-static char	*ft_flagsint(char *arg, t_flags *flags)
+static char	*ft_flagsunsigned(char *arg, t_flags *flags)
 {
 	if (*arg == '0' && flags->precision == 0 && flags->checkprecision)
 		return (ft_flagsempty(flags));
@@ -23,15 +23,15 @@ static char	*ft_flagsint(char *arg, t_flags *flags)
 	return (ft_flagselse(arg, flags));
 }
 
-int			ft_fillint(t_buf *buffer, const char **format, va_list arguments,
+int			ft_fillunsigned(t_buf *buffer, const char **format, va_list arguments,
 		t_flags *flags)
 {
-	char	*arg;
-	int		i;
-	char	*temp;
+	char				*arg;
+	unsigned int		i;
+	char				*temp;
 
-	i = va_arg(arguments, int);
-	if ((!(temp = ft_itoa(i))) || (!(arg = (ft_flagsint(temp, flags)))))
+	i = va_arg(arguments, unsigned int);
+	if ((!(temp = ft_itoa_base((long long)i, "0123456789"))) || (!(arg = (ft_flagsunsigned(temp, flags)))))
 		return (-1);
 	free(temp);
 	temp = arg;
@@ -44,9 +44,9 @@ int			ft_fillint(t_buf *buffer, const char **format, va_list arguments,
 		buffer->str++;
 		arg++;
 	}
-	while (**format != 'd' && **format != 'i')
+	while (**format != 'u')
 		*format += 1;
 	*format += 1;
 	free(temp);
-	return (i);
+	return (1);
 }

@@ -36,11 +36,9 @@ static void		ft_fillelse(char *arg, char *result, t_flags *flags, int len)
 
 char			*ft_flagselse_ptr(char *arg, t_flags *flags)
 {
-	char	*temp;
 	int		len;
 	char	*result;
 
-	temp = arg;
 	len = ft_strlen(arg);
 	if (len < flags->width || len < flags->precision)
 	{
@@ -54,6 +52,5 @@ char			*ft_flagselse_ptr(char *arg, t_flags *flags)
 	if (flags->precision == 0 || flags->precision < len)
 		flags->precision = len;
 	ft_fillelse(arg, result, flags, len);
-	free(temp);
 	return (result);
 }

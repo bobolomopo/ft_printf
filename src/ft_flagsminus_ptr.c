@@ -35,11 +35,9 @@ static void	ft_fillminus(char *arg, char *result, t_flags *flags, int len)
 
 char		*ft_flagsminus_ptr(char *arg, t_flags *flags)
 {
-	char	*temp;
 	int		len;
 	char	*result;
 
-	temp = arg;
 	len = ft_strlen(arg);
 	if (len < flags->width || len < flags->precision)
 	{
@@ -49,6 +47,5 @@ char		*ft_flagsminus_ptr(char *arg, t_flags *flags)
 	else
 		return (ft_strjoin("0x", arg));
 	ft_fillminus(arg, result, flags, len);
-	free(temp);
 	return (result);
 }

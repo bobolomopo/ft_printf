@@ -15,8 +15,10 @@
 static void	ft_fillminus(char *arg, char *result, t_flags *flags, int len)
 {
 	int		j;
+	char	*temp;
 
 	j = 0;
+	temp = arg;
 	if (*arg == '-')
 	{
 		result[j] = *arg++;
@@ -29,15 +31,14 @@ static void	ft_fillminus(char *arg, char *result, t_flags *flags, int len)
 		result[j++] = *arg++;
 	while (j < flags->width)
 		result[j++] = ' ';
+	arg = temp;
 }
 
 char		*ft_flagsminus(char *arg, t_flags *flags)
 {
-	char	*temp;
 	int		len;
 	char	*result;
 
-	temp = arg;
 	len = ft_strlen(arg);
 	if (len < flags->width || len < flags->precision)
 	{
@@ -45,8 +46,7 @@ char		*ft_flagsminus(char *arg, t_flags *flags)
 			return (NULL);
 	}
 	else
-		return (arg);
+		return (ft_strdup(arg));
 	ft_fillminus(arg, result, flags, len);
-	free(temp);
 	return (result);
 }

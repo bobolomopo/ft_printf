@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fillint.c                                       :+:      :+:    :+:   */
+/*   ft_fillchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-static char	*ft_flagsstr(char *arg, t_flags *flags)
+static char	*ft_flagschar(char *arg, t_flags *flags)
 {
 	if (flags->width == 0 && flags->checkprecision)
 		return (ft_flagsprecision_str(arg, flags));
@@ -21,37 +21,73 @@ static char	*ft_flagsstr(char *arg, t_flags *flags)
 	return (ft_flagselse_str(arg, flags));
 }
 
-int			ft_fillstr(t_buf *buffer, const char **format, va_list arguments,
+int			ft_fillchar(t_buf *buffer, const char **format, va_list arguments,
 		t_flags *flags)
 {
 	char	*arg;
-	char	*str;
+	int		c;
 	char	*temp;
+	int		i;
 
-	str = (char *)va_arg(arguments, char *);
-	if (str == NULL)
+	c = va_arg(arguments, int);
+	if (c == 0 || c == -0)
 	{
-		if (!(arg = (ft_flagsstr("(null)", flags))))
-			return (-1);
+		i = -1;
+		if (flags->minus == 1)
+		{
+			if (ft_check(buffer) < 0)
+				return (-1);
+			*buffer->str = '\0';
+			buffer->pos++;
+			buffer->str++;
+			while (++i < flags->width - 1)
+			{
+				if (ft_check(buffer) < 0)
+					return (-1);
+				*buffer->str = ' ';
+				buffer->pos++;
+				buffer->str++;
+			}
+		}
+		else
+		{
+			while (++i < flags->width - 1)
+			{
+				if (ft_check(buffer) < 0)
+					return (-1);
+				*buffer->str = ' ';
+				buffer->pos++;
+				buffer->str++;
+			}
+			if (ft_check(buffer) < 0)
+				return (-1);
+			*buffer->str = '\0';
+			buffer->pos++;
+			buffer->str++;
+		}
 	}
 	else
 	{
-	if (!(arg = (ft_flagsstr(str, flags))))
-		return (-1);
-	}
-	temp = arg;
-	while (*arg)
-	{
-		if (ft_check(buffer) < 0)
+		if (!(temp = ft_strnew(1)))
 			return (-1);
-		*buffer->str = *arg;
-		buffer->pos++;
-		buffer->str++;
-		arg++;
+		temp[0] = (char)c;
+		if (!(arg = (ft_flagschar(temp, flags))))
+			return (-1);
+		free(temp);
+		temp = arg;
+		while (*arg)
+		{
+			if (ft_check(buffer) < 0)
+				return (-1);
+			*buffer->str = *arg;
+			buffer->pos++;
+			buffer->str++;
+			arg++;
+		}
+		free(temp);
 	}
-	while (**format != 's' && **format != 'c')
+	while (**format != 'c')
 		*format += 1;
 	*format += 1;
-	free(temp);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:15:14 by jandre            #+#    #+#             */
-/*   Updated: 2020/02/19 17:15:10 by jandre           ###   ########.fr       */
+/*   Updated: 2020/03/02 12:05:24 by jandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ static int	ft_width(const char **format, t_flags *flags, va_list arguments)
 	if (**format == '*')
 	{
 		flags->width = va_arg(arguments, int);
+		if (flags->width < 0)
+		{
+			flags->width *= -1;
+			flags->minus = 1;
+		}
 		*format += 1;
 		return (0);
 	}
 	if (**format >= '0' && **format <= '9')
 	{
 		flags->width = ft_atoi(*format);
-		*format += ft_nbrlen(flags->width);
+		while (**format >= '0' && **format <= '9')
+			*format += 1;
 	}
 	return (0);
 }
@@ -36,12 +42,15 @@ static int	ft_precision(const char **format, t_flags *flags, va_list arguments)
 	{
 		flags->precision = va_arg(arguments, int);
 		*format += 1;
+		if (flags->precision < 0)
+			flags->checkprecision = 0;
 		return (0);
 	}
 	if (**format >= '0' && **format <= '9')
 	{
 		flags->precision = ft_atoi(*format);
-		*format += ft_nbrlen(flags->precision);
+		while (**format >= '0' && **format <= '9')
+			*format += 1;
 	}
 	return (0);
 }

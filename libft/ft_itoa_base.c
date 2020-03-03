@@ -20,6 +20,7 @@ char	*ft_itoa_base(long long nbr, char *base)
 	int		nbrlen;
 	int		i;
 
+	
 	baselen = ft_strlen(base);
 	nbrlen = ft_nbrlen_base(nbr, baselen);
 	if (nbr == 0)

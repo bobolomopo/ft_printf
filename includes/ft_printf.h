@@ -13,7 +13,7 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # ifndef BUFFER_SIZE_PRINTF
-#  define BUFFER_SIZE_PRINTF 100
+#  define BUFFER_SIZE_PRINTF 1000
 # endif
 # include <stdlib.h>
 # include <unistd.h>
@@ -51,20 +51,20 @@ int				ft_fillarg(t_buf *buffer, const char **format,
 		va_list arguments);
 int				ft_fillstr(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags);
+int				ft_fillchar(t_buf *buffer, const char **format,
+		va_list arguments, t_flags *flags);
 int				ft_fillint(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags);
 int				ft_fillptr(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags);
 int				ft_fillpct(t_buf *buffer, const char **format,
 		t_flags *flags);
-int				ft_filloctal(t_buf *buffer, const char **format,
-		va_list arguments);
-int				ft_fillhexa(t_buf *buffer, const char **format,
-		va_list arguments);
-int				ft_fillhexamaj(t_buf *buffer, const char **format,
-		va_list arguments);
 int				ft_fillunsigned(t_buf *buffer, const char **format,
-		va_list arguments);
+		va_list arguments, t_flags *flags);
+int				ft_fillhexamin(t_buf *buffer, const char **format,
+		va_list arguments, t_flags *flags);
+int				ft_fillhexamaj(t_buf *buffer, const char **format,
+		va_list arguments, t_flags *flags);
 int				digit_count(unsigned long long ptr, int size);
 char			*ft_itoa_base(long long nbr, char *base);
 char			*ft_flagsminus(char *arg, t_flags *flags);
@@ -74,7 +74,7 @@ char			*ft_flagselse_ptr(char *arg, t_flags *flags);
 char			*ft_flagszero_ptr(char *arg, t_flags *flags);
 char			*ft_flagsminus_ptr(char *arg, t_flags *flags);
 char			*ft_flagselse_str(char *arg, t_flags *flags);
-char			*ft_flagszero_str(char *arg, t_flags *flags);
 char			*ft_flagsminus_str(char *arg, t_flags *flags);
+char			*ft_flagsprecision_str(char *arg, t_flags *flags);
 
 #endif
