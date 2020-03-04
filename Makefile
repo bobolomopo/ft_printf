@@ -18,7 +18,8 @@ SRC := ft_allocate.c ft_check.c ft_checkflags.c ft_fillint.c ft_flagselse.c \
 	ft_flagsempty_ptr.c ft_flagszero_ptr.c ft_flagsminus_ptr.c \
 	ft_flagselse_ptr.c ft_fillpct.c ft_fillstr.c ft_flagsempty_str.c \
 	ft_flagselse_str.c ft_flagsminus_str.c ft_flagsprecision_str.c \
-	ft_fillhexamin.c ft_fillhexamaj.c ft_fillunsigned.c ft_fillchar.c
+	ft_fillhexamin.c ft_fillhexamaj.c ft_fillunsigned.c ft_fillchar.c \
+	ft_fill.c ft_fillarg.c
 SRC_DIR = ./src
 OBJECTS := $(SRC:.c=.o)
 LIBRARIES = libftprintf.a ./libft/libft.a

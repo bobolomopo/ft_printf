@@ -23,23 +23,6 @@ static char		*ft_flagshexa(char *arg, t_flags *flags)
 	return (ft_flagselse(arg, flags));
 }
 
-static int		ft_fill(t_buf *buffer, char *arg, const char **format)
-{
-	while (*arg)
-	{
-		if (ft_check(buffer) < 0)
-			return (-1);
-		*buffer->str = *arg;
-		buffer->pos++;
-		buffer->str++;
-		arg++;
-	}
-	while (**format != 'X')
-		*format += 1;
-	*format += 1;
-	return (1);
-}
-
 int				ft_fillhexamaj(t_buf *buffer, const char **format,
 		va_list arguments, t_flags *flags)
 {
@@ -53,7 +36,7 @@ int				ft_fillhexamaj(t_buf *buffer, const char **format,
 		return (-1);
 	free(temp);
 	temp = arg;
-	if (ft_fill(buffer, arg, format) < 0)
+	if (ft_fill(arg, buffer, format, 'X') < 0)
 		return (-1);
 	free(temp);
 	return (1);

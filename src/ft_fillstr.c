@@ -36,22 +36,12 @@ int			ft_fillstr(t_buf *buffer, const char **format, va_list arguments,
 	}
 	else
 	{
-	if (!(arg = (ft_flagsstr(str, flags))))
-		return (-1);
+		if (!(arg = (ft_flagsstr(str, flags))))
+			return (-1);
 	}
 	temp = arg;
-	while (*arg)
-	{
-		if (ft_check(buffer) < 0)
-			return (-1);
-		*buffer->str = *arg;
-		buffer->pos++;
-		buffer->str++;
-		arg++;
-	}
+	if (ft_fill(arg, buffer, format, 's') < 0)
+		return (-1);
 	free(temp);
-	while (**format != 's' && **format != 'c')
-		*format += 1;
-	*format += 1;
 	return (1);
 }

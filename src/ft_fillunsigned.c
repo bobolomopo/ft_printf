@@ -23,15 +23,16 @@ static char	*ft_flagsunsigned(char *arg, t_flags *flags)
 	return (ft_flagselse(arg, flags));
 }
 
-int			ft_fillunsigned(t_buf *buffer, const char **format, va_list arguments,
-		t_flags *flags)
+int			ft_fillunsigned(t_buf *buffer, const char **format,
+	va_list arguments, t_flags *flags)
 {
 	char				*arg;
 	unsigned int		i;
 	char				*temp;
 
 	i = va_arg(arguments, unsigned int);
-	if ((!(temp = ft_itoa_base((long long)i, "0123456789"))) || (!(arg = (ft_flagsunsigned(temp, flags)))))
+	if ((!(temp = ft_itoa_base((long long)i, "0123456789"))) ||
+		(!(arg = (ft_flagsunsigned(temp, flags)))))
 		return (-1);
 	free(temp);
 	temp = arg;

@@ -21,50 +21,79 @@ static char	*ft_flagschar(char *arg, t_flags *flags)
 	return (ft_flagselse_str(arg, flags));
 }
 
+static int	ft_fillminus(t_buf *buffer, t_flags *flags, int c)
+{
+	int		i;
+
+	i = -1;
+	if (ft_check(buffer) < 0)
+		return (-1);
+	*buffer->str = (char)c;
+	buffer->pos++;
+	buffer->str++;
+	while (++i < flags->width - 1)
+	{
+		if (ft_check(buffer) < 0)
+			return (-1);
+		*buffer->str = ' ';
+		buffer->pos++;
+		buffer->str++;
+	}
+	return (1);
+}
+
+static int	ft_fillelse(t_buf *buffer, t_flags *flags, int c)
+{
+	int i;
+
+	i = -1;
+	while (++i < flags->width - 1)
+	{
+		if (ft_check(buffer) < 0)
+			return (-1);
+		*buffer->str = ' ';
+		buffer->pos++;
+		buffer->str++;
+	}
+	if (ft_check(buffer) < 0)
+		return (-1);
+	*buffer->str = (char)c;
+	buffer->pos++;
+	buffer->str++;
+	return (1);
+}
+
+static int	ft_fillnonprint(t_buf *buffer, t_flags *flags,
+	const char **format, int c)
+{
+	if (flags->minus == 1)
+	{
+		if (ft_fillminus(buffer, flags, c) < 0)
+			return (-1);
+	}
+	else
+	{
+		if (ft_fillelse(buffer, flags, c) < 0)
+			return (-1);
+	}
+	while (**format != 'c')
+		*format += 1;
+	*format += 1;
+	return (1);
+}
+
 int			ft_fillchar(t_buf *buffer, const char **format, va_list arguments,
 		t_flags *flags)
 {
 	char	*arg;
 	int		c;
 	char	*temp;
-	int		i;
 
 	c = va_arg(arguments, int);
 	if (c < 32 || c > 127)
 	{
-		i = -1;
-		if (flags->minus == 1)
-		{
-			if (ft_check(buffer) < 0)
-				return (-1);
-			*buffer->str = (char)c;
-			buffer->pos++;
-			buffer->str++;
-			while (++i < flags->width - 1)
-			{
-				if (ft_check(buffer) < 0)
-					return (-1);
-				*buffer->str = ' ';
-				buffer->pos++;
-				buffer->str++;
-			}
-		}
-		else
-		{
-			while (++i < flags->width - 1)
-			{
-				if (ft_check(buffer) < 0)
-					return (-1);
-				*buffer->str = ' ';
-				buffer->pos++;
-				buffer->str++;
-			}
-			if (ft_check(buffer) < 0)
-				return (-1);
-			*buffer->str = (char)c;
-			buffer->pos++;
-			buffer->str++;
-		}
+		if (ft_fillnonprint(buffer, flags, format, c) < 0)
+			return (-1);
 	}
 	else
 	{
@@ -75,19 +104,9 @@ int			ft_fillchar(t_buf *buffer, const char **format, va_list arguments,
 			return (-1);
 		free(temp);
 		temp = arg;
-		while (*arg)
-		{
-			if (ft_check(buffer) < 0)
-				return (-1);
-			*buffer->str = *arg;
-			buffer->pos++;
-			buffer->str++;
-			arg++;
-		}
+		if (ft_fill(arg, buffer, format, 'c') < 0)
+			return (-1);
 		free(temp);
 	}
-	while (**format != 'c')
-		*format += 1;
-	*format += 1;
 	return (1);
 }

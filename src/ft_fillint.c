@@ -31,7 +31,8 @@ int			ft_fillint(t_buf *buffer, const char **format, va_list arguments,
 	char	*temp;
 
 	i = va_arg(arguments, int);
-	if ((!(temp = ft_itoa(i))) || (!(arg = (ft_flagsint(temp, flags)))))
+	if ((!(temp = ft_itoa(i))) ||
+		(!(arg = (ft_flagsint(temp, flags)))))
 		return (-1);
 	free(temp);
 	temp = arg;

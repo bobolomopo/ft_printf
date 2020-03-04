@@ -36,18 +36,8 @@ int			ft_fillpct(t_buf *buffer, const char **format, t_flags *flags)
 		return (-1);
 	free(pct);
 	temp = arg;
-	while (*arg)
-	{
-		if (ft_check(buffer) < 0)
-			return (-1);
-		*buffer->str = *arg;
-		buffer->pos++;
-		buffer->str++;
-		arg++;
-	}
-	while (**format != '%')
-		*format += 1;
-	*format += 1;
+	if (ft_fill(arg, buffer, format, '%') < 0)
+		return (-1);
 	free(temp);
 	return (1);
 }

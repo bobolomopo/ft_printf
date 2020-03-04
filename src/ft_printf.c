@@ -12,7 +12,29 @@
 
 #include "../includes/ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+static int	ft_fillprintf(t_buf *buffer, const char **format, va_list arguments)
+{
+	while (**format != '\0')
+	{
+		if (ft_check(buffer) < 0)
+			return (-1);
+		if (**format == '%')
+		{
+			if (ft_fillarg(buffer, format, arguments) < 0)
+				return (-1);
+		}
+		else
+		{
+			*buffer->str = **format;
+			buffer->pos++;
+			*format += 1;
+			buffer->str++;
+		}
+	}
+	return (1);
+}
+
+int			ft_printf(const char *format, ...)
 {
 	va_list		arguments;
 	t_buf		buffer;
@@ -22,57 +44,11 @@ int		ft_printf(const char *format, ...)
 	buffer.str = NULL;
 	buffer.size = BUFFER_SIZE_PRINTF;
 	va_start(arguments, format);
-	while (*format != '\0')
-	{
-		if (ft_check(&buffer) < 0)
-			return (-1);
-		if (*format == '%')
-		{
-			if ((ft_fillarg(&buffer, &format, arguments)) < 0)
-				return (-1);
-		}
-		else
-		{
-			*buffer.str = *format;
-			buffer.pos++;
-			format++;
-			buffer.str++;
-		}
-	}
+	ft_fillprintf(&buffer, &format, arguments);
 	buffer.str = buffer.str - buffer.pos;
 	write(1, buffer.str, buffer.pos);
 	free(buffer.str);
 	ret = buffer.pos;
 	va_end(arguments);
 	return (ret);
-}
-
-int		ft_fillarg(t_buf *buffer, const char **format, va_list arguments)
-{
-	t_flags	flags;
-
-	flags.minus = 0;
-	flags.zero = 0;
-	flags.width = 0;
-	flags.precision = 0;
-	flags.checkprecision = 0;
-	*format += 1;
-	ft_checkflags(format, &flags, arguments);
-	if (**format == '%')
-		ft_fillpct(buffer, format, &flags);
-	else if (**format == 'd' || **format == 'i')
-		ft_fillint(buffer, format, arguments, &flags);
-	else if (**format == 'p')
-		ft_fillptr(buffer, format, arguments, &flags);
-	else if (**format == 's')
-		ft_fillstr(buffer, format, arguments, &flags);
-	else if (**format == 'c')
-		ft_fillchar(buffer, format, arguments, &flags);
-	else if (**format == 'u')
-		ft_fillunsigned(buffer, format, arguments, &flags);
-	else if (**format == 'x')
-		ft_fillhexamin(buffer, format, arguments, &flags);
-	else if (**format == 'X')
-		ft_fillhexamaj(buffer, format, arguments, &flags);
-	return (0);
 }

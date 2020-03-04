@@ -75,5 +75,6 @@ char			*ft_flagsminus_ptr(char *arg, t_flags *flags);
 char			*ft_flagselse_str(char *arg, t_flags *flags);
 char			*ft_flagsminus_str(char *arg, t_flags *flags);
 char			*ft_flagsprecision_str(char *arg, t_flags *flags);
+int				ft_fill(char *arg, t_buf *buffer, const char **format, char c);
 
 #endif
